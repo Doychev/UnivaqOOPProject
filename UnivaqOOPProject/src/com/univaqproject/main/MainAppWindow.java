@@ -140,15 +140,22 @@ public class MainAppWindow extends JFrame {
 	
 	public void executeAnalysis() {
 		linksLine.setEditable(false);
-		//execute analysis
 
-		MySQLAccess dao = new MySQLAccess();
-	    try {
-			dao.readDataBase();
-		} catch (Exception e) {
+		//execute analysis
+		String data = JWebconnector.getData(linksLine.getText());
+		try {
+			String result = TagText.analyseData(data);
+			messageBox.setText(result);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		MySQLAccess dao = new MySQLAccess();
+		
 		linksLine.setText("");
 		linksLine.setEditable(true);
 	}

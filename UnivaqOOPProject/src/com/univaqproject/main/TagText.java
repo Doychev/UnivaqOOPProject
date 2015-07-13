@@ -1,6 +1,7 @@
 package com.univaqproject.main;
 
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class TagText {
 	//A tokenizer divides text into a sequence of tokens, which roughly correspond to "words".
 	
 	
-    public static void main(String[] args) throws IOException,
+    public static String analyseData(String data) throws IOException,
             ClassNotFoundException {
     	
     	/*
@@ -31,13 +32,9 @@ public class TagText {
         // Initialize the tagger
         MaxentTagger tagger = new MaxentTagger("left3words-wsj-0-18.tagger");
  
-        // The sample string
-        String sample = "This is a sample text";
-        
-        
  
         // The tagged string
-        String tagged = tagger.tagString(sample);
+        String tagged = tagger.tagString(data);
  
         List<String> taggedWords = new ArrayList<String>(Arrays.asList(tagged.split(" ")));
         for (String word : taggedWords) {
@@ -55,33 +52,42 @@ public class TagText {
         }
 
         // Output the result
-        System.out.println(tagged + "\n");
+        StringBuilder sb = new StringBuilder();
         
-	    System.out.println("Words:");
+        //sb.append(tagged + "\n\n");
+        
+        sb.append("Words:\n");
 		for (Map.Entry<String, Integer> entry : wordsCounts.entrySet())
 		{
-		    System.out.println(entry.getKey() + ": " + entry.getValue());
+			sb.append(entry.getKey() + ": " + entry.getValue() + "\n");
 		}
 
-	    System.out.println("\nTags:");
+		sb.append("\nTags:\n");
 		for (Map.Entry<String, Integer> entry : tagsCounts.entrySet())
 		{
-			String realMeaning = "";
-			switch (entry.getKey()) {
-			case "NN":
-				realMeaning = "Noun";
-				break;
-
-			case "VBZ":
-				realMeaning = "Verb";
-				break;
-
-			default:
-				break;
-			} 
-		    System.out.println(realMeaning + ": " + entry.getValue());
+			String realMeaning = getRealMeaning(entry.getKey());
+			sb.append(realMeaning + ": " + entry.getValue() + "\n");
 		}
+		
+		return sb.toString();        
+    }
+    
+    public static String getRealMeaning(String abbr) {
+    	String realMeaning = "";
+		switch (abbr) {
+		case "NN":
+			realMeaning = "Noun";
+			break;
 
-        
+		case "VBZ":
+			realMeaning = "Verb";
+			break;
+			
+			//TODO: top 3 words
+
+		default:
+			break;
+		} 
+		return realMeaning;
     }
 }
