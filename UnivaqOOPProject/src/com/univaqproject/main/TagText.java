@@ -75,12 +75,148 @@ public class TagText {
     public static String getRealMeaning(String abbr) {
     	String realMeaning = "";
 		switch (abbr) {
+		case "CC":
+			realMeaning = "Coordinating conjuction";
+			break;
+
+		case "CD":
+			realMeaning = "Cardinal number";
+			break;
+			
+		case "DT":
+			realMeaning = "Determiner";
+			break;
+
+		case "EX":
+			realMeaning = "Existential there";
+			break;
+			
+		case "FW":
+			realMeaning = "Foreign word";
+			break;
+
+		case "IN":
+			realMeaning = "Preposition or subordinating conjunction";
+			break;
+			
+		case "JJ":
+			realMeaning = "Adjective";
+			break;
+
+		case "JJR":
+			realMeaning = "Adjective, comparative";
+			break;
+			
+		case "JJS":
+			realMeaning = "Adjective, superlative";
+			break;
+
+		case "LS":
+			realMeaning = "List item marker";
+			break;
+			
+		case "MD":
+			realMeaning = "Modal";
+			break;
+
 		case "NN":
-			realMeaning = "Noun";
+			realMeaning = "Noun, singular or mass";
+			break;
+			
+		case "NNS":
+			realMeaning = "Noun, plural";
+			break;
+			
+		case "NNP":
+			realMeaning = "Proper noun, singular";
+			break;
+
+		case "NNPS":
+			realMeaning = "Proper noun, plural";
+			break;
+			
+		case "PDT":
+			realMeaning = "Predeterminer";
+			break;
+
+		case "POS":
+			realMeaning = "Possessive ending";
+			break;
+			
+		case "PRP":
+			realMeaning = "Personal pronoun";
+			break;
+
+		case "PRP$":
+			realMeaning = "Possessive pronoun";
+			break;
+			
+		case "RB":
+			realMeaning = "Adverb";
+			break;
+
+		case "RBR":
+			realMeaning = "Adverb, comparative";
+			break;
+			
+		case "RBS":
+			realMeaning = "Adverb, superlative";
+			break;
+
+		case "RP":
+			realMeaning = "Particle";
+			break;
+			
+		case "SYM":
+			realMeaning = "Symbol";
+			break;
+			
+		case "TO":
+			realMeaning = "to";
+			break;
+
+		case "UH":
+			realMeaning = "Interjection";
+			break;
+			
+		case "VB":
+			realMeaning = "Verb, base form";
+			break;
+
+		case "VBD":
+			realMeaning = "Verb, past tense";
+			break;
+			
+		case "VBG":
+			realMeaning = "Verb, gerund or present participle";
+			break;
+
+		case "VBN":
+			realMeaning = "Verb, past participle";
+			break;
+			
+		case "VBP":
+			realMeaning = "Verb, non-3rd person singular present";
 			break;
 
 		case "VBZ":
-			realMeaning = "Verb";
+			realMeaning = "Verb, 3rd person singular present";
+			break;
+			
+		case "WDT":
+			realMeaning = "Wh-determiner";
+			break;
+
+		case "WP":
+			realMeaning = "Wh-pronoun";
+			break;
+			
+		case "WP$":
+			realMeaning = "Possessive wh-pronoun";
+			break;
+			
+		case "WRB":
+			realMeaning = "Wh-adverb";
 			break;
 			
 			//TODO: top 3 words
@@ -89,5 +225,9 @@ public class TagText {
 			break;
 		} 
 		return realMeaning;
+    }
+    
+    public static void top3Words (String data) {
+    	
     }
 }
