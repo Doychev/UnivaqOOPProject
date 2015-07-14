@@ -33,6 +33,7 @@ public class MainAppWindow extends JFrame {
 	protected SubmitListener submitListener;
 
 	public static void main(String args[]) throws IOException {
+		
 		MainAppWindow window = new MainAppWindow();
 	}
 	
@@ -142,10 +143,10 @@ public class MainAppWindow extends JFrame {
 		linksLine.setEditable(false);
 
 		//execute analysis
-		String data = JWebconnector.getData(linksLine.getText());
+		AggregatorData data = JWebconnector.getData(linksLine.getText());
 		try {
-			String result = TagText.analyseData(data);
-			messageBox.setText(result);
+			AggregatorData result = TagText.analyseData(data);
+			messageBox.setText(result.getAnalysedWebData());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,7 +156,12 @@ public class MainAppWindow extends JFrame {
 		}
 		
 		MySQLAccess dao = new MySQLAccess();
-		
+		try {
+			dao.persistData(data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		linksLine.setText("");
 		linksLine.setEditable(true);
 	}
