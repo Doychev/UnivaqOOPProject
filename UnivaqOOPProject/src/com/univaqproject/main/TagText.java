@@ -16,7 +16,7 @@ public class TagText {
 	//A tokenizer divides text into a sequence of tokens, which roughly correspond to "words".
 	
 	
-    public static String analyseData(String data) throws IOException,
+    public static AggregatorData analyseData(AggregatorData data) throws IOException,
             ClassNotFoundException {
     	
     	/*
@@ -34,7 +34,7 @@ public class TagText {
  
  
         // The tagged string
-        String tagged = tagger.tagString(data);
+        String tagged = tagger.tagString(data.getRawWebData());
  
         List<String> taggedWords = new ArrayList<String>(Arrays.asList(tagged.split(" ")));
         for (String word : taggedWords) {
@@ -69,7 +69,10 @@ public class TagText {
 			sb.append(realMeaning + ": " + entry.getValue() + "\n");
 		}
 		
-		return sb.toString();        
+		data.setAnalysedWebData(sb.toString());
+		data.setTagsCounts(tagsCounts);
+		data.setWordsCounts(wordsCounts);
+		return data;        
     }
     
     public static String getRealMeaning(String abbr) {
