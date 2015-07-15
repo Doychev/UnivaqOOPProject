@@ -8,6 +8,9 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -20,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.html.HTML.Tag;
 
 public class MainAppWindow extends JFrame {
 	
@@ -31,10 +35,12 @@ public class MainAppWindow extends JFrame {
 	protected JScrollPane messageScroller;
 	protected JButton submitButton;
 	protected SubmitListener submitListener;
+	AggregatorData ad = new AggregatorData();
 
 	public static void main(String args[]) throws IOException {
 		
 		MainAppWindow window = new MainAppWindow();
+		
 	}
 	
 	public MainAppWindow() throws IOException {
@@ -141,12 +147,11 @@ public class MainAppWindow extends JFrame {
 	
 	public void executeAnalysis() {
 		linksLine.setEditable(false);
-
 		//execute analysis
 		AggregatorData data = JWebconnector.getData(linksLine.getText());
 		try {
-			AggregatorData result = TagText.analyseData(data);
-			messageBox.setText(result.getAnalysedWebData());
+			data = TagText.analyseData(data);
+			messageBox.setText(data.getAnalysedWebData());
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
